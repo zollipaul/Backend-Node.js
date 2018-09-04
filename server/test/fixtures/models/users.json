@@ -1,0 +1,20 @@
+{
+  "admin":{
+    "username":"admin",
+    "password":"password",
+    "email":"admin@myapp.com",
+    "group": "Admin"
+  },
+  "alice":{
+    "username":"alice",
+    "password":"password",
+    "email":"alice@mail.com",
+    "group": "User"
+  },
+  "bob":{
+    "username":"bob",
+    "password":"password",
+    "email":"bob@mail.com",
+    "group": "User"
+  }
+}

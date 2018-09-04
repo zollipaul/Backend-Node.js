@@ -1,0 +1,78 @@
+{
+  "websiteUrl": "http://localhost:8080",
+  "log": {
+    "console": {
+      "level": "info",
+      "timestamp": true,
+      "colorize": true
+    }
+  },
+  "redis":{
+    "url": "redis://localhost:6379"
+  },
+  "koa": {
+    "port": 9000,
+    "apiBasePath": "/api/v1/",
+    "cookieSecret": ["your-super-session-secret"],
+    "staticContent": ["build"],
+    "logger": true,
+    "cors":{
+      "credentials": true
+    }
+  },
+  "db":{
+    "driver": "pg",
+    "dialect":"postgres",
+    "database": "approach-dev",
+    "user": "paulzollmann",
+    "password": null,
+    "host": "localhost",
+    "port": "5432",
+    "logging": true,
+    "pool": {
+      "idle": 60000,
+      "max": 100
+    }
+  },
+//  "db":{
+//    "driver": "sqlite3",
+//    "dialect":"sqlite",
+//    "database": "dev",
+//    "user": "user",
+//    "password": "password",
+//    "host": "localhost",
+//    "port": "5432",
+//    "logging": false,
+//    "pool": {
+//      "idle": 60000,
+//      "max": 100
+//    }
+//  },
+  "jwt": {
+    "secret": "I love shrimp with mayonnaise",
+    "options": {
+      "expiresIn": "15 days"
+    }
+  },
+
+  "authentication":{
+    /*
+    "facebook":{
+      "clientID":"",
+      "clientSecret":"",
+      "callbackURL": "http://localhost:3000/v1/auth/facebook/callback"
+    }
+    */
+  },
+  "mail": {
+    "from": "Paul Zollmann <postmaster@sandbox75bf06a7ecfc4bafb647c986357c8bfe.mailgun.org>",
+    "signature": "Paul Zollmann",
+    "smtp": {
+      "service": "Mailgun",
+      "auth": {
+        "user": "postmaster@sandbox75bf06a7ecfc4bafb647c986357c8bfe.mailgun.org",
+        "pass": "testpw"
+      }
+    }
+  }
+}

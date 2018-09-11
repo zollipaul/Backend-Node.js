@@ -1,4 +1,4 @@
-module.exports = function(sequelize, DataTypes) {
+module.exports = (sequelize, DataTypes) => {
   let Ticket = sequelize.define(
     "Ticket",
     {
@@ -10,7 +10,7 @@ module.exports = function(sequelize, DataTypes) {
       underscored: true
     }
   );
-  Ticket.associate = function(models) {
+  Ticket.associate = models => {
     Ticket.belongsTo(models.User, {
       foreignKey: {
         name: "user_id",

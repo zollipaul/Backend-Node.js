@@ -11,7 +11,7 @@ const profile = {
   first_name: "justin"
 };
 
-describe("FacebookStrategy", function() {
+describe("FacebookStrategy", () => {
   let models = testMngr.app.data.sequelize.models;
   before(async () => {
     await testMngr.start();

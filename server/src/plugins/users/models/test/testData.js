@@ -1,7 +1,7 @@
 import assert from 'assert';
 import testMngr from '~/test/testManager';
 
-describe('Data', function(){
+describe('Data', () => {
   let app = testMngr.app;
   let models = app.data.sequelize.models;
   it.skip('seed tha database', async () => {

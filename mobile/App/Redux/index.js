@@ -19,6 +19,7 @@ export const reducers = combineReducers({
   ships: require("./ShipsRedux").reducer,
   salvoes: require("./SalvoRedux").reducer,
   token: require("./TokenRedux").reducer,
+  socialAuth: require("./SocialAuthRedux").reducer
 });
 
 export default () => {

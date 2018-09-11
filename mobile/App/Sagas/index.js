@@ -10,6 +10,7 @@ import { PlayersTypes } from "../Redux/PlayersRedux";
 import { GamesTypes } from "../Redux/GamesRedux";
 import { GeolocationTypes } from "../Redux/GeolocationRedux";
 import { TokenTypes } from "../Redux/TokenRedux";
+import { SocialAuthTypes } from "../Redux/SocialAuthRedux";
 import { GameViewTypes } from "../Redux/GameViewRedux";
 import { LeaderboardTypes } from "../Redux/LeaderboardRedux";
 import { ManageGameTypes } from "../Redux/ManageGameRedux";
@@ -35,6 +36,8 @@ import { getGameView, gameViewSyncManager } from "./GameViewSagas";
 import { getLeaderboard } from "./LeaderboardSagas";
 import { postGeolocation } from "./GeolocationSagas";
 import { setToken, clearToken, setTokenFromStore } from "./TokenSagas";
+import { socialLogin, getMe } from "./SocialAuthSagas";
+
 import { clickOnGameInTabBar, clickOnGamesInTabBar } from "./TabBarSagas";
 import {
   createGame,
@@ -66,6 +69,9 @@ export default function* root() {
     takeLatest(TokenTypes.SET_TOKEN, setToken, api),
     takeLatest(TokenTypes.CLEAR_TOKEN, clearToken, api),
     takeLatest(TokenTypes.SET_TOKEN_FROM_STORE, setTokenFromStore, api),
+
+      takeLatest(SocialAuthTypes.GET_ME_REQUEST, getMe, api),
+      takeLatest(SocialAuthTypes.SOCIAL_LOGIN, socialLogin, api),
 
     takeLatest(PlayersTypes.GET_PLAYERS_REQUEST, getPlayers, api),
     takeLatest(PlayersTypes.LOGIN_PLAYER_REQUEST, loginPlayer, api),

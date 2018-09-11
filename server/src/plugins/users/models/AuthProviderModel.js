@@ -1,4 +1,4 @@
-module.exports = function(sequelize, DataTypes) {
+module.exports = (sequelize, DataTypes) => {
   const AuthProvider = sequelize.define(
     "AuthProvider",
     {
@@ -18,7 +18,7 @@ module.exports = function(sequelize, DataTypes) {
     }
   );
 
-  AuthProvider.associate = function(models) {
+  AuthProvider.associate = models => {
     models.User.hasMany(models.AuthProvider, {
       foreignKey: "user_id",
       as: "auth_provider"

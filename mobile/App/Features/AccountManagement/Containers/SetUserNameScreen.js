@@ -11,7 +11,7 @@ class SetUserNameScreen extends PureComponent {
       <View style={styles.container}>
         <View style={styles.textContainer}>
           <Text style={styles.headerText}>What is your username?</Text>
-          <Text style={styles.headerSubtext}>(min. 5 characters)</Text>
+          <Text style={styles.headerSubtext}>(min. 3 characters)</Text>
         </View>
         <SetUserName
         setUserName={this.props.setUserName}
@@ -20,10 +20,6 @@ class SetUserNameScreen extends PureComponent {
     );
   }
 }
-// const mapStateToProps = state => {
-//   return {
-//   };
-// };
 const mapDispatchToProps = dispatch => {
   return {
     setUserName: data => {

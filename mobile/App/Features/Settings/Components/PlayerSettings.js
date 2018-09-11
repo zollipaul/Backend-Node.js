@@ -7,7 +7,7 @@ class PlayerSettings extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      userName: ""
+      username: ""
     };
   }
 
@@ -16,21 +16,21 @@ class PlayerSettings extends Component {
       <View style={styles.container}>
         <View style={styles.userNameContainer}>
           <View style={styles.textContainer}>
-            <Text style={styles.headerText}>Change your username</Text>
+            <Text style={styles.headerText}>Change your username (mind. 3 characters)</Text>
           </View>
           <TextInput
             style={styles.input}
             placeholder="New username ..."
             placeholderTextColor={Colors.white}
             autoCapitalize="none"
-            onChangeText={userName => this.setState({ userName })}
+            onChangeText={username => this.setState({ username })}
           />
           <TouchableOpacity
             style={styles.saveButton}
             onPress={() => {
-              this.props.setUserName({ userName: this.state.userName });
+              this.props.setUserName({ username: this.state.username });
             }}
-            disabled={this.state.userName.length < 5}
+            disabled={this.state.username.length < 3}
           >
             <Text style={styles.buttonText}>Save</Text>
           </TouchableOpacity>

@@ -2,7 +2,7 @@ import assert from "assert";
 import Store from "./Store";
 let config = require("config");
 
-describe("Redis", function() {
+describe("Redis", () => {
   beforeEach(async function() {
     if (!config.redis) {
       console.log("SKIP redis test");

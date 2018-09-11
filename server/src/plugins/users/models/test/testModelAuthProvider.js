@@ -1,7 +1,7 @@
 import assert from 'assert';
 import testMngr from '~/test/testManager';
 
-describe('AuthProviderModel', function(){
+describe('AuthProviderModel', () => {
   let models = testMngr.app.data.sequelize.models;
 
   before(async () => {

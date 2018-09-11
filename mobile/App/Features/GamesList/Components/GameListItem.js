@@ -34,7 +34,7 @@ class GameListItem extends PureComponent {
 
   render() {
     const gamePlayer2 = this.props.gamePlayers[1] ? (
-      <Text>{this.props.gamePlayers[1].player.userName} </Text>
+      <Text>{this.props.gamePlayers[1].user.username} </Text>
     ) : (
       <Text>...</Text>
     );
@@ -44,7 +44,7 @@ class GameListItem extends PureComponent {
     let gamePlayerIdOfCurrentUser = null;
     if (currentUser !== null) {
       this.props.gamePlayers.forEach(gamePlayer => {
-        if (gamePlayer.player.id === currentUser.id) {
+        if (gamePlayer.user.id === currentUser.id) {
           gamePlayerIdOfCurrentUser = gamePlayer.id;
         }
       });
@@ -68,7 +68,7 @@ class GameListItem extends PureComponent {
       >
         <View style={styles.col}>
           <Text style={styles.players}>
-            {this.props.gamePlayers[0].player.userName} vs {gamePlayer2}
+            {this.props.gamePlayers[0].user.username} vs {gamePlayer2}
           </Text>
           <Text style={styles.time}>{this.props.created}</Text>
         </View>

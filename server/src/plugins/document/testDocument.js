@@ -2,7 +2,7 @@ import fs from "fs";
 import assert from "assert";
 import testMngr from "~/test/testManager";
 
-describe.skip("Document No Auth", function() {
+describe.skip("Document No Auth", () => {
   let client;
   before(async () => {
     await testMngr.start();
@@ -25,7 +25,7 @@ describe.skip("Document No Auth", function() {
   });
 });
 
-describe.skip("Document", function() {
+describe.skip("Document", () => {
   let client;
   before(async () => {
     await testMngr.start();

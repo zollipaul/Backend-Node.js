@@ -30,7 +30,6 @@ export default ({ rest }) => {
       if (!store.token) {
         return;
       }
-
       const response = await fetch(
         "https://www.googleapis.com/userinfo/v2/me",
         { headers: { Authorization: `Bearer ${store.token}` } }
@@ -88,7 +87,7 @@ export default ({ rest }) => {
           Alert.alert("Login", "no user");
           return;
         }
-        
+
         await store.saveToken(accessToken);
         store.me = user;
         await store.loginServer();

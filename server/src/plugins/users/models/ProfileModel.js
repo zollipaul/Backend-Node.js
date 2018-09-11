@@ -1,4 +1,4 @@
-module.exports = function(sequelize, DataTypes) {
+module.exports = (sequelize, DataTypes) => {
   const Profile = sequelize.define(
     "Profile",
     {
@@ -13,7 +13,7 @@ module.exports = function(sequelize, DataTypes) {
     }
   );
 
-  Profile.associate = function(models) {
+  Profile.associate = models => {
     models.User.hasOne(models.Profile, {
       foreignKey: "user_id",
       as: "profile"

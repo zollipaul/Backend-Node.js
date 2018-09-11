@@ -17,7 +17,7 @@ import GameViewActions from "../Redux/GameViewRedux";
 import TokenActions from "../Redux/TokenRedux";
 import { Alert, Platform } from "react-native";
 import { NavigationActions } from "react-navigation";
-import SafariView from "react-native-safari-view";
+import SocialAuthActions from "../Redux/SocialAuthRedux";
 
 // import { PlayersSelectors } from '../Redux/PlayersRedux'
 
@@ -39,6 +39,7 @@ export function* loginPlayer(api, action) {
   // success?
   if (response.ok) {
     yield put(PlayersActions.loginPlayerSuccess(response.data));
+    yield put(TokenActions.setToken(response.data.token));
     yield put(GamesActions.getGamesRequest());
   } else {
     yield put(PlayersActions.loginPlayerFailure());
@@ -58,11 +59,13 @@ export function* loginFacebook(api, action) {
 
 export function* loginGoogle(api, action) {
   const { data } = action;
+  console.log(data);
   const response = yield call(api.loginGoogle, data);
-  console.log(response);
   // success?
   if (response.ok) {
     yield put(PlayersActions.loginPlayerSuccess(response.data));
+    yield put(TokenActions.setToken(response.data.token));
+    yield call(manageLogin);
   } else {
     yield put(PlayersActions.loginPlayerFailure());
   }
@@ -77,6 +80,8 @@ export function* logoutPlayer(api, action) {
   if (response.ok) {
     yield put(PlayersActions.logoutPlayerSuccess(response.data));
     yield put(TokenActions.clearToken());
+    yield put(SocialAuthActions.clearSocialAuth());
+
     yield put(GamesActions.getGamesRequest());
     yield put(GameViewActions.resetGameView());
   } else {
@@ -91,7 +96,11 @@ export function* signUpPlayer(api, action) {
   // success?
   if (response.ok) {
     yield put(PlayersActions.signUpPlayerSuccess(response.data));
-    yield put(GamesActions.getGamesRequest());
+
+    Alert.alert(
+      "A confirmation email has been sent to you. Click on the link to verify your email address and activate your account."
+    );
+    yield put(NavigationActions.navigate({ routeName: "LaunchScreen" }));
   } else {
     yield put(PlayersActions.signUpPlayerFailure());
   }
@@ -107,10 +116,9 @@ export function* setUserName(api, action) {
     yield put(NavigationActions.navigate({ routeName: "LaunchScreen" }));
     yield put(PlayersActions.setUserNameSuccess(response.data));
   } else {
-    if (response.data === "Username already exists") {
+    if (response.status === 422) {
       Alert.alert("This Username already exists. Choose another one!");
     }
-
     yield put(PlayersActions.setUserNameFailure());
   }
 }
@@ -119,9 +127,6 @@ export function* manageLogin() {
   yield put(GamesActions.getGamesRequest());
   const action = yield take("GET_GAMES_SUCCESS");
   const games = action.payload;
-
-  console.log("test1");
-
   if (
     games !== null &&
     games.currentUser !== null &&
@@ -130,12 +135,6 @@ export function* manageLogin() {
     yield put(NavigationActions.navigate({ routeName: "SetUserName" }));
   } else {
     yield put(NavigationActions.navigate({ routeName: "LaunchScreen" }));
-  }
-
-  console.log("test2");
-  if (Platform.OS === "ios") {
-      console.log("test3");
-      SafariView.dismiss();
   }
 }
 

@@ -15,7 +15,7 @@ export default function () {
             console.error("error creating user: ", err);
             next(err);
           }
-        }, function (err, results) {
+        }, (err, results) => {
           assert(err === null, err + " passed instead of 'null'");
           assert(results);
           if(err){

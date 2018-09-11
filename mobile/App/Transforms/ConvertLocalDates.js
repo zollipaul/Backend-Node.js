@@ -1,6 +1,6 @@
 export default games => {
-  return games.map(gamesList => {
-   return gamesList.data.map(game => (game["created"] = convertLocalDates(game.created)));
+    return games.map(gamesList => {
+   return gamesList.data.map(game => (game["createdAt"] = convertLocalDates(game.createdAt)));
   });
 };
 

@@ -66,12 +66,7 @@ export async function verifyMobile(
 export function registerWeb(passport, models, publisherUser) {
   const googleConfig = config.authentication.google;
   if (googleConfig) {
-    const strategy = new Strategy(googleConfig, async function(
-      accessToken,
-      refreshToken,
-      profile,
-      done
-    ) {
+    const strategy = new Strategy(googleConfig, async (accessToken, refreshToken, profile, done) => {
       log.debug("registerWeb me: ", JSON.stringify(profile, null, 4));
       try {
         const res = await verifyWeb(

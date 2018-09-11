@@ -12,7 +12,7 @@ FidorStrategy.prototype.userProfile = function(accessToken, done) {
 
   url = uri.format(url);
 
-  this._oauth2.get(url, accessToken, function (err, body) {
+  this._oauth2.get(url, accessToken, (err, body) => {
     let json;
     log.debug(`err ${JSON.stringify(err)}`);
     log.debug(`body ${body}`);
@@ -93,7 +93,7 @@ export function register(passport, models, publisherUser) {
   if (authConfig && authConfig.clientID) {
     log.info("configuring fidor authentication strategy");
     let strategy = new FidorStrategy(authConfig,
-      async function (accessToken, refreshToken, profile, done) {
+      async (accessToken, refreshToken, profile, done) => {
         try {
           let res = await verify(models, publisherUser, accessToken, refreshToken, profile);
           //Save it to redis

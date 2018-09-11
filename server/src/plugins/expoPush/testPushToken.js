@@ -3,7 +3,7 @@ import testMngr from "~/test/testManager";
 import Axios from "axios";
 import { sendToUser } from "./sendNotification";
 
-describe("Candidate Job", function() {
+describe("Candidate Job", () => {
   let client;
   const models = testMngr.app.data.models();
   before(async () => {

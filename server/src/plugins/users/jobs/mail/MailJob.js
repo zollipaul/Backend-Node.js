@@ -67,10 +67,8 @@ const MailJob = (config, sendMail) => {
 
     log.debug("sendEmail: ", _.omit(mailOptions, "html"));
 
-    console.log("here");
-
     return new Promise((resolve, reject) => {
-      sendMail(mailOptions, function(error, info) {
+      sendMail(mailOptions, (error, info) => {
         if (error) {
           log.error("cannot send mail: ", error);
           reject(error);

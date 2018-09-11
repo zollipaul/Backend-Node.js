@@ -83,7 +83,7 @@ export function registerWeb(passport, models, publisherUser) {
         ],
         enableProof: false
       },
-      async function(req, accessToken, refreshToken, profile, done) {
+      async (req, accessToken, refreshToken, profile, done) => {
         try {
           log.info("registerWeb ", JSON.stringify(profile, null, 4));
           let res = await verifyWeb(

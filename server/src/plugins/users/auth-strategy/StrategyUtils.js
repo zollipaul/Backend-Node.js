@@ -16,7 +16,7 @@ export function createRegisterMobile(
       passwordField: "token",
       passReqToCallback: false
     },
-    async function(userID, token, done) {
+    async (userID, token, done) => {
       try {
         let res = await verifyMobile(models, publisherUser, userID, token);
         done(res.error, res.user);

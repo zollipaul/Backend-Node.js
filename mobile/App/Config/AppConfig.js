@@ -3,7 +3,7 @@
 export default {
   // font scaling override - RN default is on
   allowTextFontScaling: true,
-  server: "https://zollipaul-battleships.herokuapp.com/api/",
+  server: "http://localhost:9000/api/v1/",
     // server: "https://localhost:8443/api/"
   //   server: "https://192.168.1.11.nip.io:8443/api/"
 

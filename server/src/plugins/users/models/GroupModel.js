@@ -1,5 +1,5 @@
 "use strict";
-module.exports = function(sequelize, DataTypes) {
+module.exports = (sequelize, DataTypes) => {
   let log = require("logfilename")(__filename);
 
   let Group = sequelize.define(
@@ -23,7 +23,7 @@ module.exports = function(sequelize, DataTypes) {
 
 
 
-  Group.associate = function(models) {
+  Group.associate = models => {
     models.User.belongsToMany(Group, {
       through: models.UserGroup,
       foreignKey: "user_id"
@@ -38,7 +38,7 @@ module.exports = function(sequelize, DataTypes) {
     });
   };
 
-  Group.seedDefault = function() {
+  Group.seedDefault = () => {
     let groupsJson = require("./fixtures/groups.json");
     //log.debug("seedDefault: ", JSON.stringify(groupsJson, null, 4));
     return Group.bulkCreate(groupsJson);
@@ -46,9 +46,7 @@ module.exports = function(sequelize, DataTypes) {
 
   let models = sequelize.models;
 
-  Group.findByName = function(groupName) {
-    return models.Group.find({ where: { name: groupName } });
-  };
+  Group.findByName = groupName => models.Group.find({ where: { name: groupName } });
 
   /**
    * Returns all the  permission associated with a group
@@ -56,18 +54,16 @@ module.exports = function(sequelize, DataTypes) {
    * @param {String} groupName  - The name of the group to search
    * @returns {Promise}  a Promise containing permission results
    */
-  Group.getPermissions = function(groupName) {
-    return models.Group.find({
-      include: [
-        {
-          model: models.Permission
-        }
-      ],
-      where: {
-        name: groupName
+  Group.getPermissions = groupName => models.Group.find({
+    include: [
+      {
+        model: models.Permission
       }
-    });
-  };
+    ],
+    where: {
+      name: groupName
+    }
+  });
 
   return Group;
 };

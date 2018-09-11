@@ -1,10 +1,10 @@
 import assert from "assert";
 import testMngr from "~/test/testManager";
 
-describe("FacebookMobileAuth", function() {
+describe("FacebookMobileAuth", () => {
   let client;
 
-  before(async function() {
+  before(async () => {
     await testMngr.start();
   });
   beforeEach(async function() {

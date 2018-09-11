@@ -37,7 +37,7 @@ export default function register(passport, models) {
       passwordField: 'password',
       passReqToCallback: false
     },
-    async function (username, password, done) {
+    async (username, password, done) => {
       try {
         let res = await verifyLogin(models, username, password);
         done(res.error, res.user);

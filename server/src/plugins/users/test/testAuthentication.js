@@ -1,7 +1,7 @@
 import {assert} from 'chai';
 import testMngr from '~/test/testManager';
 
-describe('Authentication', function(){
+describe('Authentication', () => {
   let client;
 
   before(async () => {
@@ -30,7 +30,6 @@ describe('Authentication', function(){
       await client.post('v1/auth/logout');
       try {
         let res = await client.get('v1/me');
-        console.log(res);
         assert(false);
       } catch(err){
         assert(err);

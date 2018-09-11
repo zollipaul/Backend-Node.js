@@ -1,4 +1,4 @@
-module.exports = function(sequelize, DataTypes) {
+module.exports = (sequelize, DataTypes) => {
   const PasswordReset = sequelize.define(
     "PasswordReset",
     {
@@ -11,7 +11,7 @@ module.exports = function(sequelize, DataTypes) {
     }
   );
 
-  PasswordReset.associate = function(models) {
+  PasswordReset.associate = models => {
     models.User.hasOne(PasswordReset, { foreignKey: "user_id" });
   };
 

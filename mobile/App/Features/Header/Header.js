@@ -68,6 +68,17 @@ class Header extends Component {
         );
       }
 
+      // SignUp
+      if (routeName === "SignUp") {
+        return (
+          <View style={styles.headerLoggedOutOrPlacingShipsOrGamePlay}>
+            <View style={styles.titleView}>
+              <Text style={styles.titleText}>Register</Text>
+            </View>
+          </View>
+        );
+      }
+
       // Logged in, GameTab
       if (routeName === "Loading" && this.props.games.currentUser) {
         return (

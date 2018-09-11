@@ -1,6 +1,6 @@
 import hashPasswordHook from "./utils/hashPasswordHook";
 
-module.exports = function(sequelize, DataTypes) {
+module.exports = (sequelize, DataTypes) => {
   const UserPending = sequelize.define(
     "UserPending",
     {

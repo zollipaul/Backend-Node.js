@@ -23,7 +23,7 @@ export default function(app) {
       koaApp.use(rootRouter.routes());
     },
     displayRoutes() {
-      rootRouter.stacks.forEach(function(stack) {
+      rootRouter.stacks.forEach(stack => {
         log.debug(`${stack.methods} : ${stack.path}`);
       });
     },
@@ -33,7 +33,7 @@ export default function(app) {
       _.each(api.ops, ({ pathname, method, handler }) =>
         router[method](pathname, handler)
       );
- 
+
       baseRouter.mount(api.pathname, router);
     },
     /**
@@ -44,8 +44,8 @@ export default function(app) {
       let port = process.env.PORT || configHttp.port;
 
       log.info("start koa on port %s", port);
-      return new Promise(function(resolve) {
-        httpHandle = koaApp.listen(port, function() {
+      return new Promise(resolve => {
+        httpHandle = koaApp.listen(port, () => {
           log.info("koa server started");
           resolve();
         });
@@ -61,8 +61,8 @@ export default function(app) {
         log.info("koa server is already stopped");
         return;
       }
-      return new Promise(function(resolve) {
-        httpHandle.close(function() {
+      return new Promise(resolve => {
+        httpHandle.close(() => {
           log.info("koa server is stopped");
           resolve();
         });

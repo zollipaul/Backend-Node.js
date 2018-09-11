@@ -24,10 +24,8 @@ export default function Data(config) {
       let dirname = path.join(baseDir, name);
       fs
         .readdirSync(dirname)
-        .filter(function(file) {
-          return file.indexOf(".") !== 0 && file.slice(-3) === ".js";
-        })
-        .forEach(function(file) {
+        .filter(file => file.indexOf(".") !== 0 && file.slice(-3) === ".js")
+        .forEach(file => {
           log.debug("model file: ", file);
           data.registerModel(dirname, file);
         });
@@ -41,7 +39,7 @@ export default function Data(config) {
 
     associate() {
       log.debug("associate");
-      Object.keys(modelsMap).forEach(function(modelName) {
+      Object.keys(modelsMap).forEach(modelName => {
         if (modelsMap[modelName].associate) {
           modelsMap[modelName].associate(modelsMap);
         }
@@ -52,8 +50,10 @@ export default function Data(config) {
     },
     async start(app) {
       log.info("db start");
+
+      // set force to false to prevent overriding database
       let option = {
-        force: false
+        force: true
       };
       await sequelize.sync(option);
       await this.seedIfEmpty(app);
@@ -73,13 +73,13 @@ export default function Data(config) {
       await this.seedDefault(app);
       log.info("seeded");
     },
-
     async seedDefault(app) {
       log.debug("seedDefault");
       const plugins = app.plugins.get();
       for (let name in plugins) {
         log.debug("seedDefault plugin ", name);
         const { seedDefault } = plugins[name];
+        console.log("plugin: " + plugins[name]);
         if (_.isFunction(seedDefault)) {
           await seedDefault();
         }
@@ -87,9 +87,12 @@ export default function Data(config) {
     },
     async seedIfEmpty(app) {
       log.info("seedIfEmpty");
-      let count = await sequelize.models.User.count();
-      if (count > 0) {
-        log.info("seedIfEmpty #users: ", count);
+      let userCount = await sequelize.models.User.count();
+      let gamesCount = await sequelize.models.Game.count();
+
+      if (userCount > 0 && gamesCount > 0) {
+        log.info("seedIfEmpty #users: ", userCount);
+        log.info("seedIfEmpty #games: ", gamesCount);
       } else {
         return this.seedDefault(app);
       }

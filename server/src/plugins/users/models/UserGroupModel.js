@@ -1,7 +1,7 @@
 let assert = require('assert');
 let log = require('logfilename')(__filename);
 
-module.exports = function(sequelize, DataTypes) {
+module.exports = (sequelize, DataTypes) => {
 
   let models = sequelize.models;
   assert(models);
@@ -20,7 +20,7 @@ module.exports = function(sequelize, DataTypes) {
     * @param {String} userId   -   userId to be added to the group   *
     * @returns {Promise} returns a  Promise containing the results of the upsert
     */
-   UserGroup.addUserIdInGroups = async function(groups, userId, t) {
+   UserGroup.addUserIdInGroups = async (groups, userId, t) => {
      log.debug(`addUserIdInGroups user:${userId}, #groups ${groups.length}`);
      for (let group of groups) {
        await UserGroup.addUserIdInGroup(group, userId, t);
@@ -32,7 +32,7 @@ module.exports = function(sequelize, DataTypes) {
     * @param {String} userId   -   userId to be added to the group   *
     * @returns {Promise} returns a  Promise containing the results of the upsert
     */
-   UserGroup.addUserIdInGroup = async function(groupName, userId, t) {
+   UserGroup.addUserIdInGroup = async (groupName, userId, t) => {
      log.debug(`addUserIdInGroup user:${userId}, group: ${groupName}`);
      //let group = await models.Group.findByName(groupName);
      let group = await models.Group.find({

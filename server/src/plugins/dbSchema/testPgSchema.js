@@ -1,9 +1,9 @@
 import assert from "assert";
 import testMngr from "~/test/testManager";
 
-describe("PostgresSchema", function() {
+describe("PostgresSchema", () => {
   let client;
-  before(async function() {
+  before(async () => {
     await testMngr.start();
   });
   beforeEach(async function() {

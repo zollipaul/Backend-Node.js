@@ -33,13 +33,13 @@ export default function(app) {
     register(passport, models, publisher);
   }
 
-  passport.serializeUser(function(user, done) {
+  passport.serializeUser((user, done) => {
     log.debug("serializeUser user.id", user.id);
     //TODO use redis
     done(null, user);
   });
 
-  passport.deserializeUser(function(user, done) {
+  passport.deserializeUser((user, done) => {
     log.debug("deserializeUser ", user.id);
     //TODO use redis
     done(null, user);

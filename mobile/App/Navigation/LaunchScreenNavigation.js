@@ -1,7 +1,8 @@
 import React from "react";
 import { createStackNavigator } from "react-navigation";
 import LaunchScreen from "../Features/GamesList/Containers/LaunchScreen";
-import SetUserName from "../Features/GamesList/Containers/SetUserNameScreen";
+import SetUserName from "../Features/AccountManagement/Containers/SetUserNameScreen";
+import SignUp from "../Features/AccountManagement/Containers/SignUp";
 
 import Header from "../Features/Header/Header";
 import { Animated, Easing } from "react-native";
@@ -13,6 +14,9 @@ const LaunchScreenNavigation = createStackNavigator(
     },
     SetUserName: {
       screen: SetUserName
+    },
+    SignUp: {
+      screen: SignUp
     }
   },
 

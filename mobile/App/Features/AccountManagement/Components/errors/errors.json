@@ -1,0 +1,14 @@
+{
+    "username": {
+        "message": "Username field must contain a username between 3 and 64 characters."
+    },
+    "email": {
+        "message": "Email field must contain a valid email address."
+    },
+    "password": {
+        "message": "Password field must contain a valid password between 6 and 64 characters."
+    },
+    "notSamePassword": {
+        "message": "Both passwords are not the same."
+    }
+}

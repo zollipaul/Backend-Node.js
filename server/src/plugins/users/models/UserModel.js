@@ -1,8 +1,8 @@
 import bcrypt from "bcryptjs";
 import Promise from "bluebird";
-import hashPasswordHook from './utils/hashPasswordHook';
+import hashPasswordHook from "./utils/hashPasswordHook";
 
-module.exports = function(sequelize, DataTypes) {
+module.exports = (sequelize, DataTypes) => {
   const log = require("logfilename")(__filename);
   const models = sequelize.models;
 
@@ -19,6 +19,10 @@ module.exports = function(sequelize, DataTypes) {
         unique: true,
         allowNull: false
       },
+      userNameIsSet: {
+        type: DataTypes.BOOLEAN,
+        defaultValue: false,
+      },
       email: {
         type: DataTypes.STRING(64),
         unique: true,
@@ -34,7 +38,7 @@ module.exports = function(sequelize, DataTypes) {
         type: DataTypes.JSONB
       },
       password: DataTypes.VIRTUAL,
-      passwordHash: DataTypes.TEXT,
+      passwordHash: DataTypes.TEXT
     },
     {
       tableName: "users",
@@ -46,7 +50,7 @@ module.exports = function(sequelize, DataTypes) {
     }
   );
 
-  User.seedDefault = async function() {
+  User.seedDefault = async () => {
     let usersJson = require("./fixtures/users.json");
     //log.debug("seedDefault: ", JSON.stringify(usersJson, null, 4));
     for (let userJson of usersJson) {
@@ -69,7 +73,15 @@ module.exports = function(sequelize, DataTypes) {
         }
       ],
       where: { [key]: value },
-      attributes: ["id", "email", "username", "picture", "createdAt", "updatedAt"]
+      attributes: [
+        "id",
+        "email",
+        "username",
+        "picture",
+        "createdAt",
+        "updatedAt",
+        "userNameIsSet"
+      ]
     });
   };
   User.findByEmail = async function(email) {
@@ -78,7 +90,6 @@ module.exports = function(sequelize, DataTypes) {
   User.findByUserId = async function(userid) {
     return this.findByKey("id", userid);
   };
-
   User.findByUsername = async function(userName) {
     return this.findByKey("username", userName);
   };
@@ -89,10 +100,10 @@ module.exports = function(sequelize, DataTypes) {
       }
     });
   };
-  User.createUserInGroups = async function(userJson, groups) {
+  User.createUserInGroups = async (userJson, groups) => {
     log.debug("createUserInGroups user:%s, group: ", userJson, groups);
     return sequelize
-      .transaction(async function(t) {
+      .transaction(async t => {
         let userCreated = await models.User.create(userJson, {
           transaction: t
         });
@@ -129,11 +140,12 @@ module.exports = function(sequelize, DataTypes) {
         });
         return userCreated;
       })
-      .catch(function(err) {
+      .catch(err => {
         log.error("createUserInGroups: rolling back", err);
         throw err;
       });
   };
+
   User.checkUserPermission = async function(userId, resource, action) {
     log.debug("Checking %s permission for %s on %s", action, userId, resource);
     let where = {
@@ -180,9 +192,9 @@ module.exports = function(sequelize, DataTypes) {
 
   User.prototype.comparePassword = function(candidatePassword) {
     let me = this;
-    return new Promise(function(resolve, reject) {
+    return new Promise((resolve, reject) => {
       let hashPassword = me.get("passwordHash") || "";
-      bcrypt.compare(candidatePassword, hashPassword, function(err, isMatch) {
+      bcrypt.compare(candidatePassword, hashPassword, (err, isMatch) => {
         if (err) {
           return reject(err);
         }
@@ -195,6 +207,13 @@ module.exports = function(sequelize, DataTypes) {
     let values = this.get({ clone: true });
     delete values.passwordHash;
     return values;
+  };
+
+  User.associate = models => {
+    User.hasMany(models.GamePlayer, {
+      foreignKey: "userId",
+      as: "gamePlayers"
+    });
   };
 
   return User;

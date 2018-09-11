@@ -1,4 +1,4 @@
-module.exports = function(sequelize, DataTypes) {
+module.exports = (sequelize, DataTypes) => {
   const Document = sequelize.define(
     "Document",
     {
@@ -14,7 +14,7 @@ module.exports = function(sequelize, DataTypes) {
       underscored: true
     }
   );
-  Document.associate = function(models) {
+  Document.associate = models => {
     Document.belongsTo(models.User, {
       foreignKey: {
         name: "user_id",

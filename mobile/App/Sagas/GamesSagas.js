@@ -17,9 +17,9 @@ import { delay } from "redux-saga";
 
 export function* getGames(api) {
   const response = yield call(api.getGames);
-  console.log(response);
   // success?
-  if (response.ok) {
+    console.log(response);
+    if (response.ok) {
     ConvertLocalDates(response.data.games);
     yield put(GamesActions.getGamesSuccess(response.data));
   } else {

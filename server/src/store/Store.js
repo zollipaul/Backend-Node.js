@@ -10,7 +10,7 @@ export default function(config = {}) {
     },
     async start() {
       log.debug("start ", config);
-      return new Promise(function(resolve, reject) {
+      return new Promise((resolve, reject) => {
         if (config.redis) {
           client = redis.createClient(config.redis);
           client.on("error", err => {

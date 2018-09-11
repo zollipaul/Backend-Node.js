@@ -1,7 +1,7 @@
 let log = require('logfilename')(__filename);
 let _ = require('lodash');
 
-module.exports = function(sequelize/*, DataTypes*/) {
+module.exports = sequelize/*, DataTypes*/ => {
   const models = sequelize.models;
   const GroupPermission = sequelize.define('GroupPermission', {},
     {
@@ -11,7 +11,7 @@ module.exports = function(sequelize/*, DataTypes*/) {
     }
   );
 
-  GroupPermission.seedDefault = async function() {
+  GroupPermission.seedDefault = async () => {
     let groupPermissionsJson = require('./fixtures/group_permission.json');
     //log.debug('seedDefault: ', JSON.stringify(groupPermissionsJson, null, 4));
     //console.log('creating all groupPermissions:',groupsPermissions)
@@ -27,7 +27,7 @@ module.exports = function(sequelize/*, DataTypes*/) {
    *
    * @returns {Promise} returns a list of Promises results
    */
-  GroupPermission.add = async function(groupName, permissionsNames) {
+  GroupPermission.add = async (groupName, permissionsNames) => {
       log.debug(`add: group ${groupName}, permissionsNames ${permissionsNames}`);
       let group = await models.Group.findByName(groupName);
       if (!group)  {

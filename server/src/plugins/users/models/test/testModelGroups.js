@@ -4,7 +4,7 @@ const expect = chai.expect;
 import assert from 'assert';
 import testMngr from '~/test/testManager';
 
-describe('GroupModel', function() {
+describe('GroupModel', () => {
     const app = testMngr.app;
     const models = app.data.sequelize.models;
     let userId;

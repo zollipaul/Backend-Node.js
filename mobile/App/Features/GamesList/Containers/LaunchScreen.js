@@ -14,7 +14,7 @@ import ManageGameActions from "../../../Redux/ManageGameRedux";
 import TokenActions from "../../../Redux/TokenRedux";
 import GamesActions from "../../../Redux/GamesRedux";
 import GeolocationActions from "../../../Redux/GeolocationRedux";
-import LoginAndSignUp from "../Components/LoginAndSignUp";
+import LoginAndSignUp from "../../AccountManagement/Containers/LoginAndSignUp";
 import Loading from "../../Waiting/Components/Loading";
 import SortByLocationButton from "../Components/SortByLocationButton";
 import CreateGameButton from "../Components/CreateGameButton";
@@ -34,59 +34,6 @@ class LaunchScreen extends PureComponent {
   constructor(props) {
     super(props);
   }
-
-  // Set up Linking
-  componentDidMount() {
-    // Add event listener to handle OAuthLogin:// URLs
-    Linking.addEventListener("url", this.handleOpenURL);
-    // Launched from an external URL
-    Linking.getInitialURL().then(url => {
-      if (url) {
-        console.log(url);
-        this.handleOpenURL({ url });
-      }
-    });
-  }
-
-  componentWillUnmount() {
-    // Remove event listener
-    Linking.removeEventListener("url", this.handleOpenURL);
-  }
-
-  handleOpenURL = event => {
-    const token = this.getParameterByName("token", event.url);
-    this.props.putToken(token);
-    this.props.manageLogin();
-  };
-  // Handle Login with Facebook button tap
-  loginWithFacebook = () => this.openURL(AppConfig.server + "login/facebook");
-
-  // Handle Login with Google button tap
-  loginWithGoogle = () => this.openURL(AppConfig.server + "login/google");
-
-  // Open URL in a browser
-  openURL = url => {
-    // Use SafariView on iOS
-    if (Platform.OS === "ios") {
-      SafariView.show({
-        url: url,
-        fromBottom: true
-      });
-    }
-    // Or Linking.openURL on Android
-    else {
-      Linking.openURL(url);
-    }
-  };
-
-  getParameterByName = (name, url) => {
-    name = name.replace(/[\[\]]/g, "\\$&");
-    let regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
-      results = regex.exec(url);
-    if (!results) return null;
-    if (!results[2]) return "";
-    return decodeURIComponent(results[2].replace(/\+/g, " "));
-  };
 
   /************************************************************
    * STEP 2
@@ -141,7 +88,7 @@ class LaunchScreen extends PureComponent {
       <GameListItem
         turn={item.turn}
         id={item.id}
-        created={item.created}
+        created={item.createdAt}
         gamePlayers={item.gamePlayers}
         stage={item.stage}
         distance={item.distance}
@@ -208,10 +155,7 @@ class LaunchScreen extends PureComponent {
     if (this.props.games.currentUser === null) {
       return (
         <LoginAndSignUp
-          login={this.login}
-          signUp={this.signUp}
-          loginWithFacebook={this.loginWithFacebook}
-          loginWithGoogle={this.loginWithGoogle}
+          navigation={this.props.navigation}
         />
       );
     }
@@ -236,14 +180,6 @@ class LaunchScreen extends PureComponent {
       <Loading />
     );
   }
-
-  login = (userName, password) => {
-    this.props.loginPlayer({ userName: userName, password: password });
-  };
-
-  signUp = (userName, password) => {
-    this.props.signUpPlayer({ userName: userName, password: password });
-  };
 }
 
 const mapStateToProps = state => {
@@ -261,18 +197,6 @@ const mapDispatchToProps = dispatch => {
     },
     changeGame: payload => {
       dispatch(ManageGameActions.changeGame(payload));
-    },
-    loginPlayer: data => {
-      dispatch(PlayersActions.loginPlayerRequest(data));
-    },
-    signUpPlayer: data => {
-      dispatch(PlayersActions.signUpPlayerRequest(data));
-    },
-    loginFacebook: () => {
-      dispatch(PlayersActions.loginFacebookRequest());
-    },
-    loginGoogle: () => {
-      dispatch(PlayersActions.loginGoogleRequest());
     },
     getGames: () => {
       dispatch(GamesActions.getGamesRequest());

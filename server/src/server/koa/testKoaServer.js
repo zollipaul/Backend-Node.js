@@ -3,14 +3,14 @@ import Server from './koaServer';
 import Axios from 'axios';
 import {assert} from 'chai';
 
-describe('Koa', function(){
+describe('Koa', () => {
   const baseUrl = "http://localhost:9000";
   let server = Server(testMngr.app);
   it('start and stop ok', async () => {
     await server.start();
     await server.stop();
   });
-  describe('Cors Middleware', function(){
+  describe('Cors Middleware', () => {
     before(async () => {
       await server.start();
     });

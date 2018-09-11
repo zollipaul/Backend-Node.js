@@ -7,7 +7,7 @@ export default function hashPasswordHook(instance) {
         return resolve();
       }
 
-      bcrypt.hash(password, 10, function(err, hash) {
+      bcrypt.hash(password, 10, (err, hash) => {
         if (err) {
           console.error("hashPasswordHook ", err);
           return reject(err);

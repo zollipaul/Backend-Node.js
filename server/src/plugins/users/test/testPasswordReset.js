@@ -2,7 +2,7 @@ let assert = require('assert');
 import sinon from 'sinon';
 import testMngr from '~/test/testManager';
 
-describe('PasswordReset', function () {
+describe('PasswordReset', () => {
   let app = testMngr.app;
   let models = app.data.sequelize.models;
   let client;

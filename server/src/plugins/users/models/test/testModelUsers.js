@@ -5,7 +5,7 @@ let chance = require('chance')();
 
 //let fixtures = require(__dirname + '/../fixtures/models/users');
 
-describe('UserModel', function(){
+describe('UserModel', () => {
   let models = testMngr.app.data.sequelize.models;
   let userModel = models.User;
 

@@ -19,6 +19,7 @@ const errorMsg = (err, info) => {
 
 const localAuthCB = ctx => (err, user, info = {}) => {
   const jwtConfig = _.defaults(config.jwt, {secret: "secret"});
+
   log.debug("localAuthCB %s, %s, %s", JSON.stringify(user), JSON.stringify(info), JSON.stringify(err));
   if (user) {
     ctx.body = {

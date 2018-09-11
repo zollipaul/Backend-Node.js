@@ -20,7 +20,7 @@ var sql = require('./sql');
  *  }
  * }
  */
-exports.toJSON = function (sequelize, schema) {
+exports.toJSON = (sequelize, schema) => {
   var queries = [
     sequelize.query(sql.getSequences, { replacements: [schema], type: sequelize.QueryTypes.SELECT }),
     sequelize.query(sql.getColumns, { replacements: [schema], type: sequelize.QueryTypes.SELECT }),
@@ -29,18 +29,18 @@ exports.toJSON = function (sequelize, schema) {
   ];
 
   return Promise.all(queries)
-    .spread(function (sequences, columns, tables, constraints) {
+    .spread((sequences, columns, tables, constraints) => {
       const columnGroups = _.groupBy(columns, 'table_name');
       return {
-        tables: _.transform(_.keyBy(tables, 'table_name'), function (result, table, name) {
+        tables: _.transform(_.keyBy(tables, 'table_name'), (result, table, name) => {
           result[name] = _.extend(table, {
             columns: _.keyBy(columnGroups[name], 'column_name')
           });
         }),
-        constraints: _.transform(_.groupBy(constraints, 'table_name'), function (result, table, tableName) {
+        constraints: _.transform(_.groupBy(constraints, 'table_name'), (result, table, tableName) => {
           result[tableName] = _.groupBy(table, 'column_name');
         }),
-        sequences: _.transform(_.groupBy(sequences, 'table_name'), function (result, table, tableName) {
+        sequences: _.transform(_.groupBy(sequences, 'table_name'), (result, table, tableName) => {
           result[tableName] = _.keyBy(sequences, 'column_name');
         })
       };

@@ -7,7 +7,7 @@ class SetUserName extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      userName: ""
+      username: ""
     };
   }
 
@@ -19,14 +19,14 @@ class SetUserName extends Component {
           placeholder="Username ..."
           placeholderTextColor={Colors.white}
           autoCapitalize="none"
-          onChangeText={userName => this.setState({ userName })}
+          onChangeText={username => this.setState({ username })}
         />
         <TouchableOpacity
           style={styles.button}
           onPress={() => {
-            this.props.setUserName({ userName: this.state.userName });
+            this.props.setUserName({ username: this.state.username });
           }}
-          disabled={this.state.userName.length < 5}
+          disabled={this.state.username.length < 3}
         >
           <Text style={styles.buttonText}>Ok</Text>
         </TouchableOpacity>

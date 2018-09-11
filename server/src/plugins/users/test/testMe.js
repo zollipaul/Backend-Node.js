@@ -1,7 +1,7 @@
 import assert from 'assert';
 import testMngr from '~/test/testManager';
 
-describe('Me', function() {
+describe('Me', () => {
   let client;
   before(async () => {
       await testMngr.start();

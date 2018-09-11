@@ -1,4 +1,4 @@
-module.exports = function(sequelize, DataTypes) {
+module.exports = (sequelize, DataTypes) => {
   const log = require("logfilename")(__filename);
 
   const Permission = sequelize.define(
@@ -20,22 +20,20 @@ module.exports = function(sequelize, DataTypes) {
     }
   );
 
-  Permission.associate = function(models) {
+  Permission.associate = models => {
     Permission.belongsToMany(models.Group, {
       through: models.GroupPermission,
       foreignKey: "permission_id"
     });
   };
 
-  Permission.seedDefault = function() {
+  Permission.seedDefault = () => {
     let permissionsJson = require("./fixtures/permissions.json");
     //log.debug("seedDefault: ", JSON.stringify(permissionsJson, null, 4));
     return Permission.bulkCreate(permissionsJson);
   };
 
-  Permission.findByName = function(permissionName) {
-    return Permission.find({ where: { name: permissionName } });
-  };
+  Permission.findByName = permissionName => Permission.find({ where: { name: permissionName } });
 
   return Permission;
 };

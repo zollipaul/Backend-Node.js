@@ -15,8 +15,8 @@ const create = (baseURL = AppConfig.server) => {
     // here are some default headers
     headers: {
       // 'Cache-Control': 'no-cache',
-      Accept: "application/json, application/xml, text/plain, text/html"
-      // "Content-type": "application/json",
+      Accept: "application/json, application/xml, text/plain, text/html",
+      "Content-type": "application/json"
       // 'X-Requested-With': 'XMLHttpRequest',
     },
     //   xhrFields: {
@@ -58,31 +58,28 @@ const create = (baseURL = AppConfig.server) => {
   // const getUser = (username) => api.get('search/users', {q: username})
   const getPlayers = () => api.get("players");
   const loginPlayer = data => {
-    console.log(data);
-    return api.post("login", qs.stringify(data), {
+    return api.post("auth/login", qs.stringify(data), {
       headers: { "content-type": "application/x-www-form-urlencoded" }
     });
   };
 
   const loginFacebook = () => api.get("login/facebook");
-  const loginGoogle = () => api.get("login/google");
+  const loginGoogle = data => api.post("auth/login_google", data);
 
-  const logoutPlayer = () => api.get("logout");
+  const logoutPlayer = () => api.post("auth/logout");
 
   const signUpPlayer = data =>
-    api.post("signUp", qs.stringify(data), {
-      headers: { "content-type": "application/x-www-form-urlencoded" }
+    api.post("auth/register", data, {
+      // headers: { "content-type": "application/x-www-form-urlencoded" }
+      headers: { "content-type": "application/json" }
     });
 
   const setUserName = data => {
-    console.log(data);
-    console.log(qs.stringify(data));
-    return api.post("setUserName", qs.stringify(data), {
-      headers: { "content-type": "application/x-www-form-urlencoded" }
+    return api.patch("me", data, {
     });
   };
 
-  const deletePlayer = () => api.get("deletePlayer");
+  const deletePlayer = () => api.delete("me");
 
   const getGames = () => api.get("games");
   const getGameView = gamePlayerId => api.get("game_view/" + gamePlayerId);

@@ -26,10 +26,20 @@
 			<key>CFBundleTypeRole</key>
 			<string>Editor</string>
 			<key>CFBundleURLName</key>
+			<string>com.googleusercontent.apps.951619303358-40fcc76ipcv47qgihg6ucpsemt8ugeg0</string>
+			<key>CFBundleURLSchemes</key>
+			<array>
+				<string>com.googleusercontent.apps.951619303358-40fcc76ipcv47qgihg6ucpsemt8ugeg0</string>
+			</array>
+		</dict>
+		<dict>
+			<key>CFBundleTypeRole</key>
+			<string>Editor</string>
+			<key>CFBundleURLName</key>
 			<string>org.zollipaul.battleships</string>
 			<key>CFBundleURLSchemes</key>
 			<array>
-				<string>OAuthLogin</string>
+				<string>org.zollipaul.battleships</string>
 			</array>
 		</dict>
 	</array>
@@ -76,10 +86,5 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
-  <key>NSAppTransportSecurity</key>
-  <dict>
-    <key>NSAllowsArbitraryLoads</key>
-    <true/>
-  </dict>
 </dict>
 </plist>

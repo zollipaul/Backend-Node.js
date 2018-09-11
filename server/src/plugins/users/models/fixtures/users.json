@@ -6,14 +6,14 @@
     "groups": ["Admin", "User"]
   },
   {
-    "username":"alice",
-    "email": "alice@mail.com",
+    "username":"Paul",
+    "email": "paul@mail.com",
     "password":"password",
     "groups": ["User"]
   },
   {
-    "username":"bob",
-    "email": "bob@mail.com",
+    "username":"Pete",
+    "email": "pete@mail.com",
     "password":"password",
     "groups": ["User"]
   }

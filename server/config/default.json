@@ -7,7 +7,7 @@
       "colorize": true
     }
   },
-  "redis":{
+  "redis": {
     "url": "redis://localhost:6379"
   },
   "koa": {
@@ -16,13 +16,13 @@
     "cookieSecret": ["your-super-session-secret"],
     "staticContent": ["build"],
     "logger": true,
-    "cors":{
+    "cors": {
       "credentials": true
     }
   },
-  "db":{
+  "db": {
     "driver": "pg",
-    "dialect":"postgres",
+    "dialect": "postgres",
     "database": "approach-dev",
     "user": "paulzollmann",
     "password": null,
@@ -34,20 +34,20 @@
       "max": 100
     }
   },
-//  "db":{
-//    "driver": "sqlite3",
-//    "dialect":"sqlite",
-//    "database": "dev",
-//    "user": "user",
-//    "password": "password",
-//    "host": "localhost",
-//    "port": "5432",
-//    "logging": false,
-//    "pool": {
-//      "idle": 60000,
-//      "max": 100
-//    }
-//  },
+  //  "db":{
+  //    "driver": "sqlite3",
+  //    "dialect":"sqlite",
+  //    "database": "dev",
+  //    "user": "user",
+  //    "password": "password",
+  //    "host": "localhost",
+  //    "port": "5432",
+  //    "logging": false,
+  //    "pool": {
+  //      "idle": 60000,
+  //      "max": 100
+  //    }
+  //  },
   "jwt": {
     "secret": "I love shrimp with mayonnaise",
     "options": {
@@ -55,22 +55,27 @@
     }
   },
 
-  "authentication":{
-    /*
-    "facebook":{
+  "authentication": {
+   /* "facebook":{
       "clientID":"",
       "clientSecret":"",
       "callbackURL": "http://localhost:3000/v1/auth/facebook/callback"
+    },*/
+    "google": {
+      "clientID": "924342170922-svos3uevvlmq1no606t5u167o52tmb52.apps.googleusercontent.com",
+      "clientSecret": "c0tOZ9AC5dldURoVZ9Wiwmj5",
+      "callbackURL": "http://localhost:9000/api/v1/auth/google/callback"
     }
-    */
   },
   "mail": {
-    "from": "Paul Zollmann <postmaster@sandbox75bf06a7ecfc4bafb647c986357c8bfe.mailgun.org>",
+    "from":
+      "Paul Zollmann <postmaster@sandbox75bf06a7ecfc4bafb647c986357c8bfe.mailgun.org>",
     "signature": "Paul Zollmann",
     "smtp": {
       "service": "Mailgun",
       "auth": {
-        "user": "postmaster@sandbox75bf06a7ecfc4bafb647c986357c8bfe.mailgun.org",
+        "user":
+          "postmaster@sandbox75bf06a7ecfc4bafb647c986357c8bfe.mailgun.org",
         "pass": "testpw"
       }
     }

@@ -1,7 +1,7 @@
 import assert from "assert";
 import testMngr from "~/test/testManager";
 
-describe.skip("Ticket No Auth", function() {
+describe.skip("Ticket No Auth", () => {
   let client;
   before(async () => {
     await testMngr.start();
@@ -31,7 +31,7 @@ describe.skip("Ticket No Auth", function() {
   });
 });
 
-describe.skip("Ticket", function() {
+describe.skip("Ticket", () => {
   let client;
   before(async () => {
     await testMngr.start();

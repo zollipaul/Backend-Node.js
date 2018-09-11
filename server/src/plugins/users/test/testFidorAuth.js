@@ -1,7 +1,7 @@
 import assert from 'assert';
 import testMngr from '~/test/testManager';
 
-describe.skip('Fidor', function(){
+describe.skip('Fidor', () => {
   let client;
 
   before(async () => {

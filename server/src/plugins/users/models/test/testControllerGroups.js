@@ -1,7 +1,7 @@
 import chai from 'chai';
 import testMngr from '~/test/testManager';
 
-describe('Configure Database', function(){
+describe('Configure Database', () => {
   let app = testMngr.app;
   let models = app.data.sequelize.models;
 
@@ -13,13 +13,13 @@ describe('Configure Database', function(){
   });
 
 
-  it.skip('should successfully find the Admin group', async function(){
+  it.skip('should successfully find the Admin group', async () => {
     let res = models.Group.findByName("Admin");
     chai.assert.typeOf(res.get().id, 'number');
     chai.assert.equal(res.get().description,'Administrator, can perform any actions');
   });
 
-  it('should successfully find the Users get /me Permission', async function(){
+  it('should successfully find the Users get /me Permission', async () => {
     let res = await models.Permission.findByName("/me get");
     chai.assert(res);
   });

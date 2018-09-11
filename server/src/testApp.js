@@ -1,6 +1,6 @@
 import App from './app';
 
-describe('App', function(){
+describe('App', () => {
 
   before(async () => {
   });

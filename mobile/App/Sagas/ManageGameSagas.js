@@ -12,9 +12,7 @@
 
 import { call, put, select, take, all } from "redux-saga/effects";
 import ManageGameActions from "../Redux/ManageGameRedux";
-import GamesActions from "../Redux/GamesRedux";
 import { GameViewSelectors } from "../Redux/GameViewRedux";
-import { GamesSelectors } from "../Redux/GamesRedux";
 import { NavigationActions } from "react-navigation";
 import GameViewActions from "../Redux/GameViewRedux";
 import ShipsActions from "../Redux/ShipsRedux";

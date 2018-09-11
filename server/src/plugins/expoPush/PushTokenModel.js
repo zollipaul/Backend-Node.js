@@ -1,4 +1,4 @@
-module.exports = function(sequelize, DataTypes) {
+module.exports = (sequelize, DataTypes) => {
   const PushToken = sequelize.define(
     "PushToken",
     {
@@ -13,7 +13,7 @@ module.exports = function(sequelize, DataTypes) {
       underscored: true
     }
   );
-  PushToken.associate = function(models) {
+  PushToken.associate = models => {
     PushToken.belongsTo(models.User, {
       as: "user",
       foreignKey: {

@@ -7,7 +7,7 @@ export default app => {
 
   const readContent = async file =>
     new Promise((resolve, reject) => {
-      fs.readFile(file.path, "binary", function(err, data) {
+      fs.readFile(file.path, "binary", (err, data) => {
         fs.unlink(file.path);
         if (err) throw reject(err);
         const data64 = new Buffer(data, "binary").toString("base64");

@@ -1,7 +1,7 @@
 import {assert} from 'chai';
 import testMngr from '~/test/testManager';
 
-describe('profileModel', function(){
+describe('profileModel', () => {
   let models = testMngr.app.data.models();
   let profileModel = models.Profile;
 

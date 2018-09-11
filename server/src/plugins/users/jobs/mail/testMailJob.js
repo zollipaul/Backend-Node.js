@@ -6,7 +6,7 @@ import Store from "../../../../store/Store";
 
 import MailJob from "./MailJob";
 
-describe("MailJob", function() {
+describe("MailJob", () => {
   let publisher = Store(config);
   let sandbox;
 
@@ -18,12 +18,12 @@ describe("MailJob", function() {
     await publisher.stop();
   });
 
-  beforeEach(function(done) {
+  beforeEach(done => {
     sandbox = sinon.sandbox.create();
     done();
   });
 
-  afterEach(function(done) {
+  afterEach(done => {
     sandbox.restore();
     done();
   });
@@ -37,7 +37,7 @@ describe("MailJob", function() {
 
   describe("Basic", () => {
     let mailJob;
-    beforeEach(function(done) {
+    beforeEach(done => {
       const sendMail = (mailOptions, fn) => {
         fn(null, mailOptions);
       };
@@ -45,7 +45,7 @@ describe("MailJob", function() {
       done();
     });
 
-    afterEach(function(done) {
+    afterEach(done => {
       done();
     });
     it.skip("getTemplate ok", async () => {

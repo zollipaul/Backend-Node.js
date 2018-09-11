@@ -74,6 +74,5 @@ export const reducer = createReducer(INITIAL_STATE, {
   [Types.GAME_VIEW_REQUEST]: request,
   [Types.GAME_VIEW_SUCCESS]: success,
   [Types.GAME_VIEW_FAILURE]: failure,
-  //
   [Types.RESET_GAME_VIEW]: resetGameView
 });
